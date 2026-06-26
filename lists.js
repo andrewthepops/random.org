@@ -21,7 +21,7 @@ Example:
 [2,0,1] = custom order
 [] = normal order
 */
-const PICK_ORDER = [3,0,1,2];
+const PICK_ORDER = [4,1,2,3];
 
 function processList(){
 
