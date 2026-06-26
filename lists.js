@@ -1,12 +1,28 @@
 /*
 ========================================
-HIDDEN CUSTOM ORDER (EDIT ONLY HERE)
+HIDDEN ORDER (HUMAN FRIENDLY)
+1 = first item
+2 = second item
+3 = third item
 ========================================
 Example:
-[2,0,1] = 3rd item first, then 1st, then 2nd
-Leave empty [] = normal random shuffle
+[3,1,2]
+means:
+3rd item → 1st
+1st item → 2nd
+2nd item → 3rd
 */
-const PICK_ORDER = [3,2,1,0];   // 👈 HIDDEN CONTROL
+const PICK_ORDER = [4,3,2,1];
+
+function secureShuffle(arr){
+
+    for(let i = arr.length - 1; i > 0; i--){
+        const j = crypto.getRandomValues(new Uint32Array(1))[0] % (i + 1);
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+
+    return arr;
+}
 
 function processList(){
 
@@ -24,30 +40,34 @@ function processList(){
 
     let result = "";
 
-    // 🔒 IF CUSTOM ORDER EXISTS (HIDDEN LOGIC)
+    // =========================
+    // MODE 1: HIDDEN ORDER MODE
+    // =========================
     if(PICK_ORDER.length > 0){
 
-        PICK_ORDER.forEach((i, pos) => {
+        PICK_ORDER.forEach((num, pos) => {
 
-            if(items[i] !== undefined){
-                result += (pos + 1) + ". " + items[i] + "\n";
+            const index = num - 1; // 🔥 convert to real index
+
+            if(items[index] !== undefined){
+                result += (pos + 1) + ". " + items[index] + "\n";
             }
 
         });
 
-    } else {
+    }
 
-        // 🎲 SECURE RANDOM SHUFFLE
-        let arr = [...items];
+    // =========================
+    // MODE 2: RANDOM MODE
+    // =========================
+    else {
 
-        for(let i = arr.length - 1; i > 0; i--){
-            const j = crypto.getRandomValues(new Uint32Array(1))[0] % (i + 1);
-            [arr[i], arr[j]] = [arr[j], arr[i]];
-        }
+        let arr = secureShuffle([...items]);
 
         arr.forEach((item, i) => {
             result += (i + 1) + ". " + item + "\n";
         });
+
     }
 
     document.getElementById("output").textContent = result;
