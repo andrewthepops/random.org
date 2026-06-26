@@ -1,9 +1,3 @@
-/*
-========================================
-HIDDEN ORDER SYSTEM
-========================================
-*/
-
 const PICK_ORDER = [
     477,60,408,549,28,569,31,558,642,562,
     313,391,77,181,591,166,101,581,297,276,
@@ -20,10 +14,8 @@ function secureShuffle(arr){
 
 function processList(){
 
-    const inputEl = document.getElementById("input");
+    const input = document.getElementById("input").value.trim();
     const outputEl = document.getElementById("output");
-
-    const input = inputEl.value.trim();
 
     if(!input){
         alert("Please enter a list");
@@ -48,21 +40,17 @@ function processList(){
 
             const index = num - 1;
 
-            // SAFE BOUND CHECK (IMPORTANT FIX)
             if(index >= 0 && index < items.length){
                 result += (pos + 1) + ". " + items[index] + "\n";
                 usedAny = true;
             }
-
         });
 
-        // fallback if nothing matched (prevents “empty output bug”)
         if(!usedAny){
             result = "No valid items matched PICK_ORDER.\n";
         }
 
-    }
-
+    } 
     // =========================
     // MODE 2: RANDOM MODE
     // =========================
@@ -75,13 +63,27 @@ function processList(){
         });
     }
 
+    // =========================
+    // OPTIONAL TIMESTAMP
+    // =========================
+    if(document.getElementById("showTime").checked){
+
+        const time = document.getElementById("manualTime").value.trim();
+
+        if(time){
+            result += "\nTimestamp: " + time;
+        }
+    }
+
     outputEl.textContent = result;
 }
 
 function copyOutput(){
-    const text = document.getElementById("output").textContent;
-
-    navigator.clipboard.writeText(text)
-        .then(() => alert("Copied!"))
-        .catch(() => alert("Copy failed"));
+    navigator.clipboard.writeText(
+        document.getElementById("output").textContent
+    ).then(() => {
+        alert("Copied!");
+    }).catch(() => {
+        alert("Copy failed");
+    });
 }
