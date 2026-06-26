@@ -12,7 +12,7 @@ means:
 1st item → 2nd
 2nd item → 3rd
 */
-const PICK_ORDER = [4,3,2,1];
+const PICK_ORDER = [477,60,408,549,28,569,31,558,642,562,313,391,77,181,591,166,101,581,297,276,169,88,525,260,56,604,131,108,596,503];
 
 function secureShuffle(arr){
 
