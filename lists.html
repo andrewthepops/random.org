@@ -1,90 +1,53 @@
-const PICK_ORDER = [
-    477,60,408,549,28,569,31,558,642,562,
-    313,391,77,181,591,166,101,581,297,276,
-    169,88,525,260,56,604,131,108,596,503
-];
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>List Generator</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-function secureShuffle(arr){
-    for(let i = arr.length - 1; i > 0; i--){
-        const j = crypto.getRandomValues(new Uint32Array(1))[0] % (i + 1);
-        [arr[i], arr[j]] = [arr[j], arr[i]];
-    }
-    return arr;
-}
+<header>
+    <h1>List Generator</h1>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="lists.html">List Generator</a>
+    </nav>
+</header>
 
-function processList(){
+<main>
 
-    const input = document.getElementById("input").value.trim();
-    const outputEl = document.getElementById("output");
+<div class="card">
 
-    if(!input){
-        alert("Please enter a list");
-        return;
-    }
+    <h2>Random List Generator</h2>
 
-    const items = input
-        .split("\n")
-        .map(x => x.trim())
-        .filter(Boolean);
+    <p>Enter one item per line:</p>
 
-    let result = "";
+    <textarea id="input"></textarea>
 
-    // =========================
-    // MODE 1: ORDER MODE
-    // =========================
-    if(PICK_ORDER.length > 0){
+    <label style="display:block; margin-top:10px;">
+        <input type="checkbox" id="showTime">
+        Show timestamp
+    </label>
 
-        let usedAny = false;
+    <label style="display:block; margin-top:10px;">
+        Timestamp (manual edit):
+        <input type="text" id="manualTime"
+               value="2026-06-26 18:53:57 UTC"
+               style="width:100%; margin-top:5px;">
+    </label>
 
-        PICK_ORDER.forEach((num, pos) => {
+    <button onclick="processList()">Generate</button>
+    <button onclick="copyOutput()">Copy</button>
 
-            const index = num - 1;
+    <div class="result" id="output">-</div>
 
-            if(index >= 0 && index < items.length){
-                result += (pos + 1) + ". " + items[index] + "\n";
-                usedAny = true;
-            }
-        });
+</div>
 
-        if(!usedAny){
-            result = "No valid items matched PICK_ORDER.\n";
-        }
+</main>
 
-    }
+<script src="lists.js?v=4"></script>
 
-    // =========================
-    // MODE 2: RANDOM MODE
-    // =========================
-    else {
-
-        const shuffled = secureShuffle([...items]);
-
-        shuffled.forEach((item, i) => {
-            result += (i + 1) + ". " + item + "\n";
-        });
-    }
-
-    // =========================
-    // MANUAL TIMESTAMP (FORMATTED)
-    // =========================
-    if(document.getElementById("showTime").checked){
-
-        let time = document.getElementById("manualTime").value.trim();
-
-        if(time){
-            result += "\nTimestamp: " + time;
-        }
-    }
-
-    outputEl.textContent = result;
-}
-
-function copyOutput(){
-    navigator.clipboard.writeText(
-        document.getElementById("output").textContent
-    ).then(() => {
-        alert("Copied!");
-    }).catch(() => {
-        alert("Copy failed");
-    });
-}
+</body>
+</html>
