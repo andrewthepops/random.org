@@ -32,22 +32,35 @@ function processList(){
         return;
     }
 
-    let items = input.split("\n").map(x => x.trim()).filter(Boolean);
-
-    // shuffle first
-    items = shuffle(items);
+    // ORIGINAL LIST (DO NOT SHUFFLE YET)
+    const originalItems = input
+        .split("\n")
+        .map(x => x.trim())
+        .filter(Boolean);
 
     let result = "";
 
+    // If custom order exists
     if(PICK_ORDER.length > 0){
 
-        PICK_ORDER.forEach((index, i) => {
-            if(items[index] !== undefined){
-                result += (i + 1) + ". " + items[index] + "\n";
+        PICK_ORDER.forEach((i, pos) => {
+
+            if(originalItems[i] !== undefined){
+                result += (pos + 1) + ". " + originalItems[i] + "\n";
             }
+
         });
 
     } else {
+
+        // default shuffle mode (secure)
+        let items = originalItems;
+
+        // Fisher-Yates shuffle
+        for(let i = items.length - 1; i > 0; i--){
+            const j = crypto.getRandomValues(new Uint32Array(1))[0] % (i + 1);
+            [items[i], items[j]] = [items[j], items[i]];
+        }
 
         items.forEach((item, i) => {
             result += (i + 1) + ". " + item + "\n";
