@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Random List Tool</title>
+<title>List Generator</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header>
-    <h1>Random List Tool</h1>
+    <h1>List Generator</h1>
     <nav>
         <a href="index.html">Home</a>
         <a href="lists.html">List Generator</a>
@@ -17,12 +17,37 @@
 </header>
 
 <main>
-    <div class="card">
-        <h2>Random List Generator</h2>
-        <p>A simple tool to shuffle lists.</p>
-        <a href="lists.html"><button>Open Generator</button></a>
-    </div>
+
+<div class="card">
+
+    <h2>Random List Generator</h2>
+
+    <p>Enter one item per line:</p>
+
+    <textarea id="input"></textarea>
+
+    <label style="display:block; margin-top:10px;">
+        <input type="checkbox" id="showTime">
+        Show timestamp
+    </label>
+
+    <label style="display:block; margin-top:10px;">
+        Timestamp (edit manually):
+        <input type="text" id="manualTime"
+               value="2026-06-26 18:53:57 UTC"
+               style="width:100%; margin-top:5px;">
+    </label>
+
+    <button onclick="processList()">Generate</button>
+    <button onclick="copyOutput()">Copy</button>
+
+    <div class="result" id="output">-</div>
+
+</div>
+
 </main>
+
+<script src="lists.js?v=3"></script>
 
 </body>
 </html>
