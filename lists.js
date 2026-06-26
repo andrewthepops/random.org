@@ -6,7 +6,7 @@ Example:
 [2,0,1] = 3rd item first, then 1st, then 2nd
 Leave empty [] = normal random shuffle
 */
-const PICK_ORDER = [4,3,2,1];   // 👈 HIDDEN CONTROL
+const PICK_ORDER = [3,2,1,0];   // 👈 HIDDEN CONTROL
 
 function processList(){
 
