@@ -1,15 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>List Generator</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>List Generator</h1>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="lists.html">List Generator</a>
+    </nav>
+</header>
+
+<main>
+
 <div class="card">
 
-    <h2>Enter your list</h2>
+    <h2>Random List Generator</h2>
 
-    <p>One item per line:</p>
+    <p>Enter one item per line:</p>
 
-    <textarea id="input" rows="10"></textarea>
+    <textarea id="input"></textarea>
+
+    <h3>Custom Order (optional)</h3>
+    <p>Example: 3,1,2,4 (1 = first item)</p>
+
+    <input id="order" placeholder="e.g. 3,1,2">
 
     <button onclick="processList()">Generate</button>
     <button onclick="copyOutput()">Copy</button>
 
-    <h3>Result</h3>
     <div class="result" id="output">-</div>
 
 </div>
