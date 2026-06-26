@@ -1,68 +1,48 @@
-function secureRandom(max){
-    const array = new Uint32Array(1);
-    crypto.getRandomValues(array);
-    return array[0] % max;
-}
-
-function shuffle(arr){
-    for(let i = arr.length - 1; i > 0; i--){
-        const j = secureRandom(i + 1);
-        [arr[i], arr[j]] = [arr[j], arr[i]];
-    }
-    return arr;
-}
-
-/*
-========================
-HIDDEN PICK ORDER
-Edit only this line:
-========================
-Example:
-[2,0,1] = custom order
-[] = normal order
-*/
-const PICK_ORDER = [4,1,2,3];
-
 function processList(){
 
     const input = document.getElementById("input").value.trim();
+    const orderInput = document.getElementById("order").value.trim();
 
     if(!input){
         alert("Please enter a list");
         return;
     }
 
-    // ORIGINAL LIST (DO NOT SHUFFLE YET)
-    const originalItems = input
+    const items = input
         .split("\n")
         .map(x => x.trim())
         .filter(Boolean);
 
     let result = "";
 
-    // If custom order exists
-    if(PICK_ORDER.length > 0){
+    // CUSTOM ORDER (1-based input from user)
+    if(orderInput){
 
-        PICK_ORDER.forEach((i, pos) => {
+        const order = orderInput
+            .split(",")
+            .map(x => parseInt(x.trim()) - 1);
 
-            if(originalItems[i] !== undefined){
-                result += (pos + 1) + ". " + originalItems[i] + "\n";
+        order.forEach((index, i) => {
+
+            if(items[index] !== undefined){
+                result += (i + 1) + ". " + items[index] + "\n";
             }
 
         });
 
     } else {
 
-        // default shuffle mode (secure)
-        let items = originalItems;
+        // DEFAULT RANDOM SHUFFLE (secure)
+        let arr = [...items];
 
-        // Fisher-Yates shuffle
-        for(let i = items.length - 1; i > 0; i--){
+        for(let i = arr.length - 1; i > 0; i--){
+
             const j = crypto.getRandomValues(new Uint32Array(1))[0] % (i + 1);
-            [items[i], items[j]] = [items[j], items[i]];
+
+            [arr[i], arr[j]] = [arr[j], arr[i]];
         }
 
-        items.forEach((item, i) => {
+        arr.forEach((item, i) => {
             result += (i + 1) + ". " + item + "\n";
         });
     }
