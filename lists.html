@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>List Generator</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>List Generator</h1>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="lists.html">List Generator</a>
+    </nav>
+</header>
+
+<main>
+
+<div class="card">
+
+    <h2>Enter your list</h2>
+
+    <p>One item per line:</p>
+
+    <textarea id="input" rows="10"></textarea>
+
+    <h3>Pick order</h3>
+    <p>Example: 1,3,2 (means 1st pick, 3rd pick, then 2nd)</p>
+
+    <input id="order" placeholder="e.g. 1,2,3">
+
+    <br>
+
+    <button onclick="processList()">Generate</button>
+    <button onclick="copyOutput()">Copy</button>
+
+    <h3>Result</h3>
+    <div class="result" id="output">-</div>
+
+</div>
+
+</main>
+
+<script src="lists.js"></script>
+</body>
+</html>
