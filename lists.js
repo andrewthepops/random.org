@@ -4,6 +4,12 @@ const PICK_ORDER = [
     169,88,525,260,56,604,131,108,596,503
 ];
 
+// ==========================
+// 🔥 DEFAULT TIMESTAMP HERE
+// You can manually edit this anytime
+// ==========================
+let DEFAULT_TIMESTAMP = "2026-06-26 18:53:57 UTC";
+
 function secureShuffle(arr){
     for(let i = arr.length - 1; i > 0; i--){
         const j = crypto.getRandomValues(new Uint32Array(1))[0] % (i + 1);
@@ -30,7 +36,7 @@ function processList(){
     let result = "";
 
     // =========================
-    // MODE 1: ORDER MODE
+    // ORDER MODE
     // =========================
     if(PICK_ORDER.length > 0){
 
@@ -50,9 +56,9 @@ function processList(){
             result = "No valid items matched PICK_ORDER.\n";
         }
 
-    } 
+    }
     // =========================
-    // MODE 2: RANDOM MODE
+    // RANDOM MODE
     // =========================
     else {
 
@@ -68,11 +74,7 @@ function processList(){
     // =========================
     if(document.getElementById("showTime").checked){
 
-        const time = document.getElementById("manualTime").value.trim();
-
-        if(time){
-            result += "\nTimestamp: " + time;
-        }
+        result += "\nTimestamp: " + DEFAULT_TIMESTAMP;
     }
 
     outputEl.textContent = result;
