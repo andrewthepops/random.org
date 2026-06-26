@@ -1,7 +1,16 @@
+/*
+========================================
+HIDDEN CUSTOM ORDER (EDIT ONLY HERE)
+========================================
+Example:
+[2,0,1] = 3rd item first, then 1st, then 2nd
+Leave empty [] = normal random shuffle
+*/
+const PICK_ORDER = [];   // 👈 HIDDEN CONTROL
+
 function processList(){
 
     const input = document.getElementById("input").value.trim();
-    const orderInput = document.getElementById("order").value.trim();
 
     if(!input){
         alert("Please enter a list");
@@ -15,30 +24,24 @@ function processList(){
 
     let result = "";
 
-    // CUSTOM ORDER (1-based input from user)
-    if(orderInput){
+    // 🔒 IF CUSTOM ORDER EXISTS (HIDDEN LOGIC)
+    if(PICK_ORDER.length > 0){
 
-        const order = orderInput
-            .split(",")
-            .map(x => parseInt(x.trim()) - 1);
+        PICK_ORDER.forEach((i, pos) => {
 
-        order.forEach((index, i) => {
-
-            if(items[index] !== undefined){
-                result += (i + 1) + ". " + items[index] + "\n";
+            if(items[i] !== undefined){
+                result += (pos + 1) + ". " + items[i] + "\n";
             }
 
         });
 
     } else {
 
-        // DEFAULT RANDOM SHUFFLE (secure)
+        // 🎲 SECURE RANDOM SHUFFLE
         let arr = [...items];
 
         for(let i = arr.length - 1; i > 0; i--){
-
             const j = crypto.getRandomValues(new Uint32Array(1))[0] % (i + 1);
-
             [arr[i], arr[j]] = [arr[j], arr[i]];
         }
 
