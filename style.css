@@ -1,56 +1,98 @@
 body{
-    font-family: Arial, sans-serif;
     margin:0;
-    background:#f4f4f4;
-    color:#222;
+    font-family: Georgia, "Times New Roman", serif;
+    background:#ffffff;
+    color:#000;
+    line-height:1.4;
 }
 
+/* HEADER */
 header{
-    background:#222;
-    color:white;
-    padding:20px;
-    text-align:center;
+    background:#f2f2f2;
+    border-bottom:1px solid #ccc;
+    padding:15px 10px;
+    text-align:left;
+}
+
+header h1{
+    margin:0;
+    font-size:22px;
+    font-weight:normal;
+}
+
+/* NAV */
+nav{
+    margin-top:8px;
 }
 
 nav a{
-    color:#6fb1ff;
-    margin:0 10px;
-    text-decoration:none;
-}
-
-nav a:hover{
+    color:#0000ee;
     text-decoration:underline;
+    margin-right:10px;
+    font-size:14px;
 }
 
+nav a:visited{
+    color:#551a8b;
+}
+
+/* MAIN LAYOUT */
 main{
-    max-width:800px;
-    margin:40px auto;
-    padding:20px;
+    max-width:900px;
+    margin:20px auto;
+    padding:10px;
 }
 
+/* BOX STYLE */
 .card{
-    background:white;
-    padding:20px;
-    border-radius:10px;
-    box-shadow:0 2px 10px rgba(0,0,0,0.1);
+    border:1px solid #ccc;
+    padding:15px;
+    background:#fff;
 }
 
+/* TEXTAREA */
 textarea{
     width:100%;
-    padding:10px;
-    font-size:16px;
-    margin-top:10px;
+    height:180px;
+    font-family: monospace;
+    font-size:14px;
+    border:1px solid #999;
+    padding:5px;
 }
 
+/* INPUT */
+input{
+    font-family: monospace;
+    font-size:14px;
+    border:1px solid #999;
+    padding:5px;
+    margin-top:5px;
+}
+
+/* BUTTONS */
 button{
     margin-top:10px;
-    padding:10px 15px;
-    font-size:16px;
+    padding:5px 10px;
+    font-size:14px;
+    border:1px solid #666;
+    background:#e6e6e6;
     cursor:pointer;
 }
 
+button:hover{
+    background:#ddd;
+}
+
+/* RESULT OUTPUT */
 .result{
-    margin-top:20px;
-    font-size:20px;
+    margin-top:15px;
+    padding:10px;
+    border-top:1px solid #ccc;
+    font-family: monospace;
     white-space:pre-line;
+}
+
+/* SMALL TEXT */
+p{
+    font-size:14px;
 }
