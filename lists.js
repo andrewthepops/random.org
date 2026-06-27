@@ -10,7 +10,7 @@ const PICK_ORDER = [
 ];
 
 // Change this whenever you want.
-const DEFAULT_TIMESTAMP = "2026-06-25 10:03:05 UTC";
+const DEFAULT_TIMESTAMP = "2026-06-25 10:03:05";
 
 function secureShuffle(arr){
 
